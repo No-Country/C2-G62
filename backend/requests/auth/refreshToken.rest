@@ -1,0 +1,3 @@
+# Mediante el token de refresco se obtiene un nuevo access token
+GET http://localhost:4000/api/auth/renew
+x-token-refresh: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJuYW1lIjoidGVzdDEyIiwiaWF0IjoxNjQxOTI1MzY2fQ.6u-4aY0SaSQp-kmknxwGk0Bu7qG5VQK8ZWcOqAj_Loc
