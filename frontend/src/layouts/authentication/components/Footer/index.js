@@ -43,9 +43,9 @@ function Footer({ light }) {
               </Icon>
             </MDBox>
             by
-            <Link href="https://www.creative-tim.com/" target="_blank">
+            <Link href="https://www.walmart.com/" target="_blank">
               <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
-                &nbsp;Creative Tim&nbsp;
+                &nbsp;Weimart&nbsp;
               </MDTypography>
             </Link>
             for a better web.
@@ -68,18 +68,18 @@ function Footer({ light }) {
             })}
           >
             <MDBox component="li" pr={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/" target="_blank">
+              <Link href="https://www.walmart.com/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
-                  Creative Tim
+                  Weimart
                 </MDTypography>
               </Link>
             </MDBox>
             <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/presentation" target="_blank">
+              <Link href="https://www.walmart.com/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
@@ -90,7 +90,7 @@ function Footer({ light }) {
               </Link>
             </MDBox>
             <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/blog" target="_blank">
+              <Link href="https://www.walmart.com/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
@@ -101,7 +101,7 @@ function Footer({ light }) {
               </Link>
             </MDBox>
             <MDBox component="li" pl={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/license" target="_blank">
+              <Link href="https://www.walmart.com/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
