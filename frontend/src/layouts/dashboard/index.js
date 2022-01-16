@@ -34,12 +34,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
+                title="Sales per year"
                 count={281}
                 percentage={{
                   color: "success",
                   amount: "+55%",
-                  label: "than lask week",
+                  label: "than last year",
                 }}
               />
             </MDBox>
@@ -63,12 +63,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
+                title="Sales last week"
                 count="34k"
                 percentage={{
                   color: "success",
                   amount: "+1%",
-                  label: "than yesterday",
+                  label: "than last month",
                 }}
               />
             </MDBox>
@@ -78,12 +78,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Followers"
+                title="Sales per regions"
                 count="+91"
                 percentage={{
                   color: "success",
                   amount: "",
-                  label: "Just updated",
+                  label: "Last month",
                 }}
               />
             </MDBox>
@@ -95,8 +95,8 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
+                  title="Last month sales"
+                  description="Latest sales Performance"
                   date="campaign sent 2 days ago"
                   chart={reportsBarChartData}
                 />
@@ -121,8 +121,8 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
+                  title="Last month sales by segment"
+                  description="Latest sales Performance"
                   date="just updated"
                   chart={tasks}
                 />
