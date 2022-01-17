@@ -1,0 +1,9 @@
+### Email es único
+POST http://localhost:4000/api/auth/new
+Content-Type: application/json
+
+{
+    "username": "test12",
+    "password": "Fm123456",
+    "email": "test12345@gmail.com"
+}
