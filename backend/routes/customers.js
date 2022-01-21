@@ -1,11 +1,11 @@
 const { Router } = require("express");
-const { dashboard } = require("../controllers/dashboard");
+const { totalClients, customersInfo } = require("../controllers/customers");
 const { validateJWT } = require("../middlewares/validate_jwt");
 
 const router = Router();
-
 router.use(validateJWT);
 
-router.get("/", dashboard);
+router.get("/", customersInfo);
+router.get("/total_clients", totalClients);
 
 module.exports = router;

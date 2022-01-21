@@ -16,7 +16,8 @@ app.use(express.json());
 
 // Autenticación
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/dashboard", require("./routes/dashboard"));
+app.use("/api/sales", require("./routes/sales"));
+app.use("/api/customers", require("./routes/customers"));
 
 //Servidor que escucha
 app.listen(process.env.PORT, () => {
