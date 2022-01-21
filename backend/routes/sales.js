@@ -6,6 +6,7 @@ const {
   lastmonthSales,
   stateSales,
   regionSales,
+  segmentSales,
 } = require("../controllers/sales");
 const { validateJWT } = require("../middlewares/validate_jwt");
 
@@ -19,5 +20,6 @@ router.get("/lastweek", lastweekSales);
 router.get("/lastmonth", lastmonthSales);
 router.get("/states", stateSales);
 router.get("/regions", regionSales);
+router.get("/segment", segmentSales);
 
 module.exports = router;

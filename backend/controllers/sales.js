@@ -74,10 +74,27 @@ const regionSales = async (req, res = response) => {
   try {
     const db = await dbConnection();
     const sales = await db.query(
-      "SELECT Zip_Code, COUNT(Row_ID) as quantity FROM Sales WHERE STR_TO_DATE(Date, '%d/%m/%Y') BETWEEN STR_TO_DATE('01/01/2012', '%d/%m/%Y') AND STR_TO_DATE('31/12/2015', '%d/%m/%Y') GROUP BY Zip_Code;"
+      "SELECT C.Region, COUNT(S.Row_ID) as total_sales FROM Customers C, Sales S WHERE C.Fullname = S.Customer_name GROUP BY C.Region;"
     );
 
     res.json({ region_sales: sales });
+  } catch (err) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Por favor hable con el administrador",
+    });
+  }
+};
+
+const segmentSales = async (req, res = response) => {
+  try {
+    const db = await dbConnection();
+    const sales = await db.query(
+      "SELECT C.Segment, COUNT(S.Row_ID) as total_sales FROM Customers C, Sales S WHERE C.Fullname = S.Customer_name GROUP BY C.Segment;"
+    );
+
+    res.json({ segment_sales: sales });
   } catch (err) {
     console.log(error);
     res.status(500).json({
@@ -94,4 +111,5 @@ module.exports = {
   lastmonthSales,
   stateSales,
   regionSales,
+  segmentSales,
 };
