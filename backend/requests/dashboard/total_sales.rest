@@ -1,0 +1,3 @@
+# Se introduce el token de acceso adquirido en el registro o en el login
+GET http://localhost:4000/api/sales/total
+x-token-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJiZDZhOTk1OC0zOGFjLTRjYzMtODBjMS1hZDlmNGExNmUxNWEiLCJuYW1lIjoidGVzdDEyIiwiaWF0IjoxNjQyNzQ3MTU3LCJleHAiOjE2NDI3NTQzNTd9.JgZkyL_GsB8ahxLYMkrs1V0yexth6bbkF5fnetY5mXI

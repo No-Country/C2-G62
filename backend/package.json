@@ -11,10 +11,14 @@
   "author": "c2-62-t-NoCountry",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
-    "mysql": "^2.18.1"
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "promise-mysql": "^5.0.4",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
