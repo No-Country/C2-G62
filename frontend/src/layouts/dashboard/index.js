@@ -20,10 +20,69 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+import React, { useState } from 'react';
+
 
 function Dashboard() {
-  const { sales, tasks } = reportsLineChartData;
 
+  //Total clientes
+  const [countClients, setCountClients] = useState(0);
+  
+  fetch('http://localhost:4000/api/customers/total_clients', {
+  headers: {
+    'x-token-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJpYXQiOjE2NDI4NDgyODgsImV4cCI6MTY0Mjg1NTQ4OH0.orgVeVSq6-5424ImzQQ1jDSDRGpWciTOFHIONOnBrfY',
+  }
+})
+   .then(resp => resp.json())
+   .then( clients_json => setCountClients(clients_json.total_clients));
+
+  //total sales
+  const [totalSales, setTotalSales] = useState(0);
+  fetch('http://localhost:4000/api/sales/total', {
+  headers: {
+    'x-token-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJpYXQiOjE2NDI4NDg1OTgsImV4cCI6MTY0Mjg1NTc5OH0.mJSfLax4t-UYFeJSJfbE7eFjhjo32OpDjGQmL9BvQik',
+    }
+  })
+   .then(resp => resp.json())
+   .then( sales_json => setTotalSales(sales_json.total_sales));
+
+  //total sales last week
+  const [salesLastWeek, setSalesLastWeek] = useState('');
+  fetch('http://localhost:4000/api/sales/lastweek', {
+  headers: {
+    'x-token-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJpYXQiOjE2NDI4NDkxOTksImV4cCI6MTY0Mjg1NjM5OX0.ftp2pZigfjTeiMNCZcGBelCYZKFglnt2BQFrJ7S0WA8',
+    }
+  })
+   .then(resp => resp.json())
+   .then( lastWeekSales_json => {
+     console.log(lastWeekSales_json.lastweek_sales);
+    //  const saleTotal = lastWeekSales_json.lastweek_sales.map(sale => sale.Sales).reduce((acc, sale) => sale + acc);
+     setSalesLastWeek(lastWeekSales_json.lastweek_sales.length);
+     
+   });
+
+
+  //total Sales last month
+  const [salesLastMonth, setSalesLastMonth] = useState('');
+  fetch('http://localhost:4000/api/sales/lastmonth', {
+  headers: {
+    'x-token-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJpYXQiOjE2NDI4NTMwMzIsImV4cCI6MTY0Mjg2MDIzMn0.Acq-TNeHg4clk1MidtiWLb6IBA2u_IMI_4OxkgPVEe0',
+    }
+  })
+   .then(resp => resp.json())
+   .then( lastMonthSales_json => {
+     console.log(lastMonthSales_json.lastmonth_sales);
+    //  const saleTotal = lastWeekSales_json.lastweek_sales.map(sale => sale.Sales).reduce((acc, sale) => sale + acc);
+    setSalesLastMonth(lastMonthSales_json.lastmonth_sales.length);
+   });
+
+
+
+
+
+
+
+  const { sales, tasks } = reportsLineChartData;
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -35,11 +94,11 @@ function Dashboard() {
                 color="dark"
                 icon="weekend"
                 title="Sales per year"
-                count={281}
+                count={totalSales}
                 percentage={{
                   color: "success",
-                  amount: "+55%",
-                  label: "than last year",
+                  amount: "100%",
+                  label: "update",
                 }}
               />
             </MDBox>
@@ -48,8 +107,8 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
+                title="Today's Clients"
+                count={countClients}
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -64,7 +123,7 @@ function Dashboard() {
                 color="success"
                 icon="store"
                 title="Sales last week"
-                count="34k"
+                count={salesLastWeek}
                 percentage={{
                   color: "success",
                   amount: "+1%",
@@ -78,12 +137,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Sales per regions"
-                count="+91"
+                title="Sales last month"
+                count={salesLastMonth}
                 percentage={{
                   color: "success",
-                  amount: "",
-                  label: "Last month",
+                  amount: "100%",
+                  label: "update",
                 }}
               />
             </MDBox>
@@ -95,7 +154,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="Last month sales"
+                  title="Sales by states"
                   description="Latest sales Performance"
                   date="campaign sent 2 days ago"
                   chart={reportsBarChartData}
@@ -106,7 +165,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="success"
-                  title="daily sales"
+                  title="sales by regions"
                   description={
                     <>
                       (<strong>+15%</strong>) increase in today sales.
@@ -121,7 +180,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="dark"
-                  title="Last month sales by segment"
+                  title="sales by segment"
                   description="Latest sales Performance"
                   date="just updated"
                   chart={tasks}
