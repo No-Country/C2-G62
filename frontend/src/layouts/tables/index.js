@@ -39,7 +39,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Top 10 selling products
+                  Customers
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -66,7 +66,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Projects Table
+                Top 6 Selling Products
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

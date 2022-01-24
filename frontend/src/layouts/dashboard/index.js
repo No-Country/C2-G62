@@ -89,7 +89,7 @@ function Dashboard() {
   );
 
     //token
-    const auth_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI5ZTRkMWQ3Yy0yOTA3LTRmNTgtOWU3OC0zZTFmODIwMDljMWMiLCJuYW1lIjoidGVzdDEyIiwiaWF0IjoxNjQzMDQ3MzQxLCJleHAiOjE2NDMwNTQ1NDF9.gFW_G4VHUw86kvLMIz7dHedB9byv7OvoN8LOtriyams';
+    const auth_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI5ZTRkMWQ3Yy0yOTA3LTRmNTgtOWU3OC0zZTFmODIwMDljMWMiLCJuYW1lIjoidGVzdDEyIiwiaWF0IjoxNjQzMDU3NDg2LCJleHAiOjE2NDMwNjQ2ODZ9.N-wLVWlXaZNB93xWkR3AiLzGV_UJIbEgraEfMFyy7yI';
     
 
   const getInfoBack = useCallback(async () => {
@@ -264,7 +264,6 @@ function Dashboard() {
         return (
         <DashboardLayout>
           <DashboardNavbar />
-          {/* Export Excel Button */}
           <MDButton
             variant="gradient"
             color="warning">
@@ -273,7 +272,6 @@ function Dashboard() {
             </Icon>
             &nbsp;Export report excel
           </MDButton>
-
             <MDBox py={3}>
             <Grid container spacing={3}>
 
