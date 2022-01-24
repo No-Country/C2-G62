@@ -12,6 +12,8 @@ import Footer from "examples/Footer";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
+import PieChart from "examples/Charts/PieChart";
+
 
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
@@ -20,82 +22,142 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
+import Icon from "@mui/material/Icon";
+import MDButton from "../../components/MDButton";
 
-function Dashboard() {
+function Dashboard() {  
+    //Total clientes
+    const [countClients, setCountClients] = useState(0);
+    //total sales
+    const [totalSales, setTotalSales] = useState(0);
+    //total sales last week
+    const [salesLastWeek, setSalesLastWeek] = useState(0);
+    //total Sales last month
+    const [salesLastMonth, setSalesLastMonth] = useState(0);
+    //new state excel
+    const [dataExcel, setDataExcel] = useState([]);
+    //pieDataset
+    const [pieDataset, setPieDataset] = useState(
+    
+      {
+        labels: [],
+        datasets: {
+        label: "",
+        backgroundColors: ["warning"],
+        data: []}
+    }
 
-  //Total clientes
-  const [countClients, setCountClients] = useState(0);
+);
+
+    //token
+    const auth_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI5ZTRkMWQ3Yy0yOTA3LTRmNTgtOWU3OC0zZTFmODIwMDljMWMiLCJuYW1lIjoidGVzdDEyIiwiaWF0IjoxNjQyOTQyMTgzLCJleHAiOjE2NDI5NDkzODN9.Do13gi7Bd0a8yeIT0WUwodjM-Dk51yruB06tDyR0Las';
+    
+
+    const getInfoBack = useCallback(async () => {
+    await fetch('http://localhost:4000/api/customers/total_clients', {
+      headers: {
+      'x-token-auth':auth_token,
+      }
+    })
+
+      .then(resp => resp.json())
+      .then( clients_json => setCountClients(clients_json.total_clients));
   
-  fetch('http://localhost:4000/api/customers/total_clients', {
-  headers: {
-    'x-token-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJpYXQiOjE2NDI4NDgyODgsImV4cCI6MTY0Mjg1NTQ4OH0.orgVeVSq6-5424ImzQQ1jDSDRGpWciTOFHIONOnBrfY',
-  }
-})
-   .then(resp => resp.json())
-   .then( clients_json => setCountClients(clients_json.total_clients));
+      await fetch('http://localhost:4000/api/sales/total', {
+      headers: {
+      'x-token-auth': auth_token,
 
-  //total sales
-  const [totalSales, setTotalSales] = useState(0);
-  fetch('http://localhost:4000/api/sales/total', {
-  headers: {
-    'x-token-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJpYXQiOjE2NDI4NDg1OTgsImV4cCI6MTY0Mjg1NTc5OH0.mJSfLax4t-UYFeJSJfbE7eFjhjo32OpDjGQmL9BvQik',
-    }
-  })
-   .then(resp => resp.json())
-   .then( sales_json => setTotalSales(sales_json.total_sales));
+      }
 
-  //total sales last week
-  const [salesLastWeek, setSalesLastWeek] = useState('');
-  fetch('http://localhost:4000/api/sales/lastweek', {
-  headers: {
-    'x-token-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJpYXQiOjE2NDI4NDkxOTksImV4cCI6MTY0Mjg1NjM5OX0.ftp2pZigfjTeiMNCZcGBelCYZKFglnt2BQFrJ7S0WA8',
-    }
-  })
-   .then(resp => resp.json())
-   .then( lastWeekSales_json => {
-     console.log(lastWeekSales_json.lastweek_sales);
-    //  const saleTotal = lastWeekSales_json.lastweek_sales.map(sale => sale.Sales).reduce((acc, sale) => sale + acc);
-     setSalesLastWeek(lastWeekSales_json.lastweek_sales.length);
-     
-   });
+    })
+      .then(resp => resp.json())
+      .then( sales_json => setTotalSales(sales_json.total_sales));
 
+      await fetch('http://localhost:4000/api/sales/lastweek', {
+        headers: {
+      'x-token-auth': auth_token,
+      }
 
-  //total Sales last month
-  const [salesLastMonth, setSalesLastMonth] = useState('');
-  fetch('http://localhost:4000/api/sales/lastmonth', {
-  headers: {
-    'x-token-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI3OTBkMjg5NC03NzE2LTQ4MTgtYWE1MC0wMWZlYmZhZGQzOWUiLCJpYXQiOjE2NDI4NTMwMzIsImV4cCI6MTY0Mjg2MDIzMn0.Acq-TNeHg4clk1MidtiWLb6IBA2u_IMI_4OxkgPVEe0',
-    }
-  })
-   .then(resp => resp.json())
-   .then( lastMonthSales_json => {
-     console.log(lastMonthSales_json.lastmonth_sales);
-    //  const saleTotal = lastWeekSales_json.lastweek_sales.map(sale => sale.Sales).reduce((acc, sale) => sale + acc);
+    })
+
+    .then(resp => resp.json())
+    .then(lastWeekSales_json => {
+    setSalesLastWeek(lastWeekSales_json.lastweek_sales.length);
+
+    });
+  
+      await fetch('http://localhost:4000/api/sales/lastmonth', {
+      headers: {
+      'x-token-auth':auth_token,
+      }
+      })
+
+    .then(resp => resp.json())
+    .then( lastMonthSales_json => {
     setSalesLastMonth(lastMonthSales_json.lastmonth_sales.length);
-   });
+    });
 
+      await fetch('http://localhost:4000/api/sales/regions', {
+      headers: {
+      'x-token-auth':auth_token,
+        } 
+    })
 
+    .then(resp => resp.json())
+    .then(regions_json => {
 
+    let regionsNames = [];
+    let regionsValues = [];
+        regions_json.region_sales.map(region => {
+        regionsNames.push(region.Region);
+        regionsValues.push(region.total_sales);
+        });
+      
+    setPieDataset({
 
+      labels: regionsNames,
+      datasets: {
+      label: "",
+      backgroundColors: ["info", "warning", "primary", "success"],
+      data: regionsValues}});
+    
+    });
+      
+    
+  },
+  []);
+  
+    useEffect(() => {
 
+    getInfoBack();
+    console.log(pieDataset);}
+    ,[getInfoBack]);
 
 
   const { sales, tasks } = reportsLineChartData;
-  return (
+    return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox py={3}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="dark"
-                icon="weekend"
-                title="Sales per year"
-                count={totalSales}
-                percentage={{
+      <MDButton
+        variant="gradient"
+        color="warning">
+        <Icon sx={{ fontWeight: "bold" }}>
+        add
+        </Icon>
+        &nbsp;Export report excel
+    </MDButton>
+    <MDBox py={3}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={6} lg={3}>
+          <MDBox mb={1.5}>
+            <ComplexStatisticsCard
+              color="dark"
+              icon="weekend"
+              title="Total Sales"
+              count={totalSales}
+              percentage={{
                   color: "success",
                   amount: "100%",
                   label: "update",
@@ -112,7 +174,7 @@ function Dashboard() {
                 percentage={{
                   color: "success",
                   amount: "+3%",
-                  label: "than last month",
+                  label: "updated",
                 }}
               />
             </MDBox>
@@ -188,6 +250,14 @@ function Dashboard() {
               </MDBox>
             </Grid>
           </Grid>
+        </MDBox>
+        <MDBox mb={3}>
+        <PieChart
+              icon={{ color: "info", component: "leaderboard" }}
+              title="Pie Chart"
+              description=""
+              chart={pieDataset}
+          />
         </MDBox>
         <MDBox>
           <Grid container spacing={3}>
