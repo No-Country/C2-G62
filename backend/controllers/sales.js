@@ -104,6 +104,23 @@ const segmentSales = async (req, res = response) => {
   }
 };
 
+const hotSalesProducts = async (req, res = response) => {
+  try {
+    const db = await dbConnection();
+    const sales = await db.query(
+      "SELECT Product_name as product_name, Unit_price as unit_price, Date as date, Sales as sales_quantity FROM Sales ORDER BY Sales DESC LIMIT 6;"
+    );
+
+    res.json({ hotsale: sales });
+  } catch (err) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Por favor hable con el administrador",
+    });
+  }
+};
+
 module.exports = {
   dashboard,
   totalSales,
@@ -112,4 +129,5 @@ module.exports = {
   stateSales,
   regionSales,
   segmentSales,
+  hotSalesProducts,
 };
