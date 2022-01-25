@@ -1,0 +1,2 @@
+GET http://localhost:4000/api/sales/regions
+x-token-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJiZDZhOTk1OC0zOGFjLTRjYzMtODBjMS1hZDlmNGExNmUxNWEiLCJuYW1lIjoidGVzdDEyIiwiaWF0IjoxNjQyNzk1ODA0LCJleHAiOjE2NDI4MDMwMDR9.KmgHerS0rHz0Kx_5ZttpIh747ASXSyYHHVs40DSRdSk
