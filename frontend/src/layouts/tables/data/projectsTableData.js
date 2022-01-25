@@ -49,10 +49,10 @@ export default function data() {
 
     rows: [
       {
-        project: <Project image={LogoAsana} name="Asana" />,
+        project: <Project image={LogoAsana} name="Polycom ViewStation™ ISDN" />,
         budget: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $2,500
+            $6,783
           </MDTypography>
         ),
         status: (
@@ -60,7 +60,7 @@ export default function data() {
             working
           </MDTypography>
         ),
-        completion: <Progress color="info" value={60} />,
+        completion: <Progress color="info" value={70} />,
         action: (
           <MDTypography component="a" href="#" color="text">
             <Icon>more_vert</Icon>
@@ -68,10 +68,10 @@ export default function data() {
         ),
       },
       {
-        project: <Project image={logoGithub} name="Github" />,
+        project: <Project image={logoAtlassian} name="Canon imageCLASS 2200 Advanced Copier" />,
         budget: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $5,000
+            $3.499
           </MDTypography>
         ),
         status: (
@@ -87,10 +87,10 @@ export default function data() {
         ),
       },
       {
-        project: <Project image={logoAtlassian} name="Atlassian" />,
+        project: <Project image={LogoAsana} name="Canon Image Class D660 Copier" />,
         budget: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $3,400
+            $599
           </MDTypography>
         ),
         status: (
@@ -106,10 +106,10 @@ export default function data() {
         ),
       },
       {
-        project: <Project image={logoSpotify} name="Spotify" />,
+        project: <Project image={logoAtlassian} name="Riverside Palais Royal Lawyers Bookcase" />,
         budget: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $14,000
+            $880
           </MDTypography>
         ),
         status: (
@@ -118,44 +118,6 @@ export default function data() {
           </MDTypography>
         ),
         completion: <Progress color="info" value={80} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project image={logoSlack} name="Slack" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $1,000
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
-          </MDTypography>
-        ),
-        completion: <Progress color="error" value={0} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project image={logoInvesion} name="Invesion" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $2,300
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
-          </MDTypography>
-        ),
-        completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
             <Icon>more_vert</Icon>
